@@ -61,7 +61,7 @@ func Do() {
 
 // Help prints the help dialog for this module
 func Help() {
-    fmt.Println("Usage: aws-docker login [profile]\n\nLog into given AWS ECR registry profile\n\nIn order to use login command edit ~/.aws/config by adding ```ecrregistryid``` to the given profile")
+    fmt.Println("Usage: aws-docker login [profile]... \n\nLog into given AWS ECR registry profile(s)\n\nIn order to use login command edit ~/.aws/config by adding ```ecrregistryid``` to the given profile(s)")
 }
 
 func toggleDebug() bool {
