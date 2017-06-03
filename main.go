@@ -6,6 +6,7 @@ import (
     "fmt"
     "os/user"
     "github.com/go-ini/ini"
+    "strings"
 )
 
 var debug = false
@@ -45,17 +46,25 @@ func dologin () {
         os.Exit(2)
     }
 
-    awsConfigProfile, err := cfg.GetSection(fmt.Sprintf("profile %s", os.Args[2]))
-    must(err)
-
-    key, err := awsConfigProfile.GetKey("ecrregistryid")
-    must(err)
-
-    if debug {
-        fmt.Printf("Obtained Key %s\n", key)
+    awsConfigProfiles := []string{}
+    for _, profile := range os.Args[2:] {
+        section, err := cfg.GetSection(fmt.Sprintf("profile %s", profile))
+        if err == nil {
+            key, err := section.GetKey("ecrregistryid")
+            if err == nil {
+                if debug {
+                    fmt.Printf("Obtained Key %s\n", key)
+                }
+                awsConfigProfiles = append(awsConfigProfiles, key.String())
+            } else {
+                fmt.Printf("No registry ids were found for profiles %s \n", key.String())
+            }
+        } else {
+            fmt.Printf("No profile was found for %s \n", profile)
+        }
     }
 
-    loginCmd := exec.Command("aws", "ecr", "get-login", "--region", "us-east-1", fmt.Sprintf("--registry-ids=%s", key))
+    loginCmd := exec.Command("aws", "ecr", "get-login", "--region", "us-east-1", fmt.Sprintf("--registry-ids=%s", strings.Join(awsConfigProfiles, " ")))
 
     loginOutResult, err := loginCmd.Output()
     must(err)
