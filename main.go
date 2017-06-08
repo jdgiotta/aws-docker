@@ -1,9 +1,10 @@
 package main
 
 import (
-    "os"
-    "github.com/jdgiotta/aws-docker/login"
     "fmt"
+    "os"
+
+    "github.com/jdgiotta/aws-docker/cmd/login"
 )
 
 func main () {
@@ -20,7 +21,7 @@ func main () {
 }
 
 func help() {
-    fmt.Println("Usage: aws-docker COMMAND [options]\nCommands:\n\tlogin [profile]... Log into given AWS ECR registry profile(s)\n\nIn order to use login command edit ~/.aws/config by adding ```ecrregistryid``` to the given profile(s)")
+    fmt.Println("\nUsage: aws-docker COMMAND [options]\nCommands:\n\tlogin [profile] Log into given AWS ECR registry profile\n\nIn order to use login command edit ~/.aws/config by adding ```ecrregistryid``` to the given profile then creates a docker login session")
 }
 
 
