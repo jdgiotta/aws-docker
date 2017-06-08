@@ -21,7 +21,7 @@ func main () {
 }
 
 func help() {
-    fmt.Println("\nUsage: aws-docker COMMAND [options]\nCommands:\n\tlogin [profile] Log into given AWS ECR registry profile\n\nIn order to use login command edit ~/.aws/config by adding ```ecrregistryid``` to the given profile then creates a docker login session")
+    fmt.Println("\nUsage: aws-docker COMMAND [options]\nCommands:\n\tlogin --profile [profile] Log into given AWS ECR registry profile\n\nIn order to use login command edit ~/.aws/config by adding ```ecrregistryid``` to the given profile then creates a docker login session")
 }
 
 

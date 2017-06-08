@@ -3,7 +3,7 @@
 Usage: aws-docker COMMAND [options]
 
 Commands:
-* login [profile] Log into given AWS ECR registry profile
+* login --profile [profile] Log into given AWS ECR registry profile
 
 
 
